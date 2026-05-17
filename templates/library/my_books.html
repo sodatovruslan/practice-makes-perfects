@@ -1,6 +1,7 @@
 {% extends 'library/base.html' %}
 {% block main %}
 <h1>My Books</h1>
+<p>Всего книг: {{ borrows.count }}</p>
 {% for borrow in borrows %}
     <div>
         <h3>{{ borrow.book.title }}</h3>
