@@ -1,0 +1,17 @@
+{% extends 'library/base.html' %}
+{% block main %}
+<h1>All Books</h1>
+{% for book in books %}
+    <div>
+        {% if book.image %}
+            <img src="{{ book.image.url }}" style="width:150px;">
+        {% endif %}
+        <h3>{{ book.title }}</h3>
+        <p>Author: {{ book.author }}</p>
+        <p>Copies: {{ book.copies }}</p>
+        <a href="{% url 'book_detail' book.pk %}">Detail</a>
+        <a href="{% url 'book_edit' book.pk %}">Update</a>
+        <a href="{% url 'book_delete' book.pk %}">Delete</a>
+    </div>
+{% endfor %}
+{% endblock %}

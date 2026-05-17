@@ -1,0 +1,37 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+
+
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
+def register(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'accounts/register.html', {
+                'error': 'Такой пользователь уже существует. Выберите другое имя.'
+            })
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        return redirect('login')
+    return render(request, 'accounts/register.html')
+
+def login_user(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        user=authenticate(request, username=username, password=password)
+        if not user:
+            return render(request, 'accounts/login.html', {'error': 'Brother error try again'})
+        login(request, user)
+        return redirect('book_list')
+    return render(request, 'accounts/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

@@ -1,0 +1,14 @@
+{% extends 'library/base.html' %}
+{% block main %}
+<h1>Register</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <button type="submit">Register</button>
+</form>
+<a href="{% url 'login' %}">Already have account? Login</a>
+{% endblock %}

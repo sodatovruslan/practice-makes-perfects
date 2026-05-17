@@ -1,0 +1,12 @@
+{% extends 'library/base.html' %}
+{% block main %}
+<h1>{{ book.title }}</h1>
+<p>Author: {{ book.author }}</p>
+<p>{{ book.description }}</p>
+<p>Copies available: {{ book.quantity }}</p>
+{% if book.quantity > 0%}
+    <a href="{% url 'borrow_book' book.pk %}">Borrow</a>
+{% else %}
+    <p>No copies available</p>
+{% endif %}
+{% endblock %}

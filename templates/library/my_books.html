@@ -1,0 +1,18 @@
+{% extends 'library/base.html' %}
+{% block main %}
+<h1>My Books</h1>
+{% for borrow in borrows %}
+    <div>
+        <h3>{{ borrow.book.title }}</h3>
+        {% if borrow.book.image %}
+    <img src="{{ borrow.book.image.url }}" style="width:150px;">
+        {% endif %}
+        <p>Borrowed: {{ borrow.borrowed_at }}</p>
+        {% if borrow.returned %}
+            <p>Returned</p>
+        {% else %}
+            <a href="{% url 'return_book' borrow.pk %}">Return</a>
+        {% endif %}
+    </div>
+{% endfor %}
+{% endblock %}
