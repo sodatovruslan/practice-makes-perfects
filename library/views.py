@@ -2,16 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Book, Borrow
 
-
 def book_list(request):
     books=Book.objects.all()
     return render(request, 'library/book_list.html', {'books': books})
 
-
 def book_detail(request, pk):
     book=get_object_or_404(Book, pk=pk)
     return render(request, 'library/book_detail.html', {'book': book})
-
 
 def borrow_book(request, pk):
     book=get_object_or_404(Book, pk=pk)
@@ -61,10 +58,10 @@ def book_update(request, pk):
         return redirect('book_list')
     return render(request, 'library/book_edit.html', {'book': book})
 
-
+    
 def book_delete(request, pk):
     book=get_object_or_404(Book, pk=pk)
     if request.method=='POST':
         book.delete()
         return redirect('book_list')
-    return render(request, 'library/book_delete.html', {'book': book})
+    return render(request, 'library/book_delete.html', {'book': book})  
